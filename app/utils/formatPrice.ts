@@ -1,4 +1,4 @@
-const formatPrice = (value: number, isArgentina: boolean) => {
+const formatPrice = (value: number, isArgentina: boolean | string) => {
   const fixedValue = value.toFixed(2);
   return isArgentina
     ? (+fixedValue.replace(".", ",").replace(/,00/, ""))

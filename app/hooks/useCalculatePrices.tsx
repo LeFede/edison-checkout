@@ -3,21 +3,25 @@ import useRetrieveUrlData from "./useRetrieveUrlData";
 import { type AdaptedCourse } from "~/env.d";
 import formatPrice from "~/utils/formatPrice";
 import { useStore } from "@nanostores/react";
-import { $appliedDiscount } from "~/store";
+import { $appliedDiscount, $formStore } from "~/store";
 
 const useCalculatePrices = () => {
   const params = useRetrieveUrlData();
   const queryClient = useQueryClient();
   const appliedDiscount = useStore($appliedDiscount);
+  const formStore = useStore($formStore);
   const { country } = params;
   const courseState = queryClient.getQueryData(["course"]) as AdaptedCourse;
   const cupos = 1;
+  console.log(formStore.paymentMethod);
 
   const currency =
-    {
-      Argentina: "ARS",
-      Spain: "EUR",
-    }[country] || "USD";
+    formStore.paymentMethod == "stripe"
+      ? "USD"
+      : {
+          Argentina: "ARS",
+          Spain: "EUR",
+        }[country] || "USD";
 
   const symbol =
     {
@@ -29,7 +33,7 @@ const useCalculatePrices = () => {
   const finalPrice: any = fullPrice * (1 - appliedDiscount);
   const twoPayments = finalPrice / 2;
 
-  const isArgentina = currency == "ARS";
+  const isArgentina = currency == "ARS" || "USD";
 
   const fullPriceString = formatPrice(fullPrice, isArgentina);
   const finalPriceString = formatPrice(finalPrice, isArgentina);
