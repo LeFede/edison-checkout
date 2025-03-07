@@ -3,11 +3,10 @@ import type { Course, AdaptedCourse } from "~/env.d";
 import { format } from "@formkit/tempo";
 
 function courseAdapter(course: Course): AdaptedCourse {
-  // const daysTilCourse = diffDays(
-  //   course?.events?.at(0)?.startTime || new Date(),
-  //   new Date()
-  // );
-  const daysTilCourse = 3;
+  const daysTilCourse = diffDays(
+    course?.events?.at(0)?.startTime || new Date(),
+    new Date()
+  );
 
   let estado = course.config.isAsync
     ? course?.type === "WORKSHOP"
