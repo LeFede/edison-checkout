@@ -10,6 +10,9 @@ const useCheckoutForm = () => {
   const appliedDiscount = useStore($appliedDiscount);
   const formHook = useForm<FormData>({
     resolver: zodResolver(mainSchema),
+    defaultValues: {
+      ...$formStore.get(),
+    },
   });
 
   const { watch } = formHook;

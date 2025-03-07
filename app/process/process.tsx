@@ -5,7 +5,7 @@ import Title from "~/components/Title";
 import Hr from "~/components/Hr";
 import Nav from "~/components/Nav";
 import { useEffect } from "react";
-import { $formStore, $originalUrl } from "~/store";
+import { $originalUrl } from "~/store";
 import toast from "react-hot-toast";
 import useCreateLead from "~/hooks/useCreateLead";
 import useRetrieveUrlData from "~/hooks/useRetrieveUrlData";
@@ -25,15 +25,18 @@ const ProcessPage = () => {
 
   /* ══════════════════════════ Extraccion ══════════════════════════════════ */
   const courseState = queryClient.getQueryData(["course"]) as AdaptedCourse;
+
   const { email } = params;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     appliedDiscount,
     handleCoupon,
+    watch,
   } = formHook;
+
   const {
     finalPriceString,
     cupos,
@@ -50,7 +53,6 @@ const ProcessPage = () => {
   useEffect(() => {
     $originalUrl.set(window.location.href);
   }, []);
-
 
   const tags: any =
     {
@@ -73,6 +75,7 @@ const ProcessPage = () => {
         onSubmit={handleSubmit(
           (_) => {
             toast.dismiss();
+            console.log(watch());
             navigate("/payment");
           },
           (e) => {

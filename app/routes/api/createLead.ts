@@ -1,6 +1,6 @@
 import { type LoaderFunction, type ActionFunction } from "react-router";
 
-import api_prod from "../../../axios";
+import api_prod from "~/axios";
 
 //
 export const loader: LoaderFunction = async () => {

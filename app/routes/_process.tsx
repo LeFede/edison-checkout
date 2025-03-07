@@ -1,7 +1,6 @@
-
 import type { Route } from "./+types/home";
 import ProcessPage from "~/process/process";
-import api from "~/../axios";
+import api from "~/axios";
 import type { Course, Price, User } from "~/env.d";
 import { diffDays } from "@formkit/tempo";
 import { $course } from "~/store";

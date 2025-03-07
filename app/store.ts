@@ -24,7 +24,7 @@ export const $formStore = atom<FormData>({
   coupon: "",
   factura: false,
   payment: "1pago",
-  paymentMethod: "none",
+  paymentMethod: "mp",
 });
 
 export const $urlParams = atom<Record<string, any>>({
