@@ -13,10 +13,9 @@ const useCalculatePrices = () => {
   const { country } = params;
   const courseState = queryClient.getQueryData(["course"]) as AdaptedCourse;
   const cupos = 1;
-  console.log(formStore.paymentMethod);
 
   const currency =
-    formStore.paymentMethod == "stripe"
+    formStore.paymentMethod == "stripe" && country != "Spain"
       ? "USD"
       : {
           Argentina: "ARS",
@@ -33,7 +32,8 @@ const useCalculatePrices = () => {
   const finalPrice: any = fullPrice * (1 - appliedDiscount);
   const twoPayments = finalPrice / 2;
 
-  const isArgentina = currency == "ARS" || "USD";
+  const isArgentina = currency == "ARS";
+  const isSpain = symbol == "€";
 
   const fullPriceString = formatPrice(fullPrice, isArgentina);
   const finalPriceString = formatPrice(finalPrice, isArgentina);
@@ -46,6 +46,7 @@ const useCalculatePrices = () => {
     twoPaymentsString,
     twoPaymentsOriginalString,
     symbol,
+    isSpain,
     cupos,
     currency,
     isArgentina,

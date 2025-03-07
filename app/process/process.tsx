@@ -44,6 +44,7 @@ const ProcessPage = () => {
     twoPaymentsOriginalString,
     twoPaymentsString,
     fullPriceString,
+    isSpain,
     currency,
     isArgentina,
   } = prices;
@@ -149,8 +150,8 @@ const ProcessPage = () => {
           </Container>
 
           <Container className="flex flex-col gap-8">
-            {isArgentina && (
-              <div className={`${!isArgentina && "hidden"}`}>
+            {!isSpain && (
+              <div className={`${isSpain && "hidden"}`}>
                 <Title>1. Selecciona un método de pago</Title>
                 <div className="flex gap-4 flex-col xss:flex-row">
                   <label className="flex flex-col justify-between items-center flex-1 gap-1">
@@ -185,7 +186,7 @@ const ProcessPage = () => {
               </div>
             )}
 
-            {!isArgentina && (
+            {symbol == "€" && (
               <input
                 type="radio"
                 className="hidden peer"
@@ -196,7 +197,7 @@ const ProcessPage = () => {
             )}
 
             <div>
-              <Title>{isArgentina && "2."} Elige un plan de pago</Title>
+              <Title>{symbol != "€" && "2."} Elige un plan de pago</Title>
               <div className="flex flex-col text-sm gap-2">
                 <label className="flex gap-2 cursor-pointer w-fit">
                   <input
@@ -272,7 +273,7 @@ const ProcessPage = () => {
             </div>
           </Container>
 
-          {isArgentina && (
+          {!isSpain && (
             <>
               <Container>
                 <Hr />
